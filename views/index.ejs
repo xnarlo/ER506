@@ -1,4 +1,58 @@
 <%- include('layout', { title: 'Home', content: `
     <h1>Welcome to the Home Page</h1>
-    <p>This is the homepage of the website.</p>
+    <p>Select an option from the dropdown inside each card:</p>
+
+    <!-- Card Section -->
+    <div class="card-container">
+        <!-- Card 1 -->
+        <div class="card">
+            <img src="/images/sample1.jpg" class="card-img" alt="Card Image 1">
+            <div class="card-body">
+                <h5 class="card-title">Card 1</h5>
+                <p class="card-text">This is a description for Card 1.</p>
+                
+                <!-- Dropdown Menu -->
+                <select class="dropdown">
+                    <option selected>Choose an option</option>
+                    <option value="1">Option 1</option>
+                    <option value="2">Option 2</option>
+                    <option value="3">Option 3</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="card">
+            <img src="/images/sample2.jpg" class="card-img" alt="Card Image 2">
+            <div class="card-body">
+                <h5 class="card-title">Card 2</h5>
+                <p class="card-text">This is a description for Card 2.</p>
+                
+                <!-- Dropdown Menu -->
+                <select class="dropdown">
+                    <option selected>Choose an option</option>
+                    <option value="1">Option A</option>
+                    <option value="2">Option B</option>
+                    <option value="3">Option C</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="card">
+            <img src="/images/sample3.jpg" class="card-img" alt="Card Image 3">
+            <div class="card-body">
+                <h5 class="card-title">Card 3</h5>
+                <p class="card-text">This is a description for Card 3.</p>
+                
+                <!-- Dropdown Menu -->
+                <select class="dropdown">
+                    <option selected>Choose an option</option>
+                    <option value="1">Choice X</option>
+                    <option value="2">Choice Y</option>
+                    <option value="3">Choice Z</option>
+                </select>
+            </div>
+        </div>
+    </div>
 ` }) %>
