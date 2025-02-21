@@ -6,6 +6,10 @@ const pageRoutes = require('./routes/pages');
 
 const app = express();
 
+
+// Include public folder
+app.use(express.static('public'));
+
 // Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public')); // Serve static files (CSS)
