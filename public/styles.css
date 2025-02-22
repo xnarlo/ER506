@@ -34,6 +34,8 @@ nav ul li a {
     gap: 20px;
     flex-wrap: wrap;
     margin-top: 20px;
+
+
 }
 
 /* Card styling */
@@ -48,7 +50,7 @@ nav ul li a {
 }
 
 .card:hover {
-    transform: scale(1.05);
+    transform: scale(1.10);
 }
 
 /* Image inside the card */
@@ -64,6 +66,8 @@ nav ul li a {
     padding: 15px;
     text-align: center;
 }
+
+/*CHANGED margin*/
 
 .card-title {
     font-size: 18px;
