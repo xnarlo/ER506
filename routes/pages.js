@@ -15,9 +15,16 @@ router.use((req, res, next) => {
     next();
 });
 
-// Protect these routes using requireLogin middleware
+// Protected routes
 router.get('/', requireLogin, (req, res) => res.render('index'));
 router.get('/about', requireLogin, (req, res) => res.render('about'));
 router.get('/guide', requireLogin, (req, res) => res.render('guide'));
+
+// Options for Card 1 (Send SMS)
+router.get('/pickup', requireLogin, (req, res) => res.render('pickup'));
+router.get('/quotation', requireLogin, (req, res) => res.render('quotation'));
+router.get('/repairupdate', requireLogin, (req, res) => res.render('repairupdate'));
+router.get('/forfeiture', requireLogin, (req, res) => res.render('forfeiture'));
+router.get('/manualsms', requireLogin, (req, res) => res.render('manualsms'));
 
 module.exports = router;

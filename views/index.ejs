@@ -4,28 +4,41 @@
 
     <!-- Card Section -->
     <div class="card-container">
-        <!-- Card 1 -->
-        <div class="card">
-            <img src="/images/smsms.jpg" class="card-img" alt="Card Image 1">
-            <div class="card-body">
-                <h5 class="card-title">Send SMS</h5>
-                <p class="card-text">Generate SMS Notification.</p>
-                
-                <!-- Dropdown Menu -->
-                <select class="dropdown">
-                    <option selected>Choose an option</option>
-                    <option value="1">Option 1</option>
-                    <option value="2">Option 2</option>
-                    <option value="3">Option 3</option>
-                </select>
+<!-- Card 1: Send SMS -->
+<div class="card">
+    <img src="/images/smsms.jpg" class="card-img" alt="Card Image 1">
+    <div class="card-body">
+        <h5 class="card-title">Send SMS</h5>
+        <p class="card-text">Generate SMS Notification.</p>
+        
+        <!-- Dropdown Menu -->
+        <select id="smsOptions" class="dropdown">
+            <option selected>Choose an option</option>
+            <option value="/pickup">Pick-up Notification</option>
+            <option value="/quotation">Quotation Reminder</option>
+            <option value="/repairupdate">Repair Update</option>
+            <option value="/forfeiture">Forfeiture Warning</option>
+            <option disabled>──────────</option>
+            <option value="/manualsms">Manually send SMS</option>
+        </select>
 
-                <!-- Go Button -->
-                <button class="go-btn">GO</button>
+        <!-- Go Button -->
+        <button class="go-btn" onclick="navigateToPage()">GO</button>
 
-            </div>
-        </div>
+    </div>
+</div>
 
-        <!-- Card 2 -->
+<script>
+    function navigateToPage() {
+        let selectedOption = document.getElementById("smsOptions").value;
+        if (selectedOption !== "Choose an option") {
+            window.location.href = selectedOption; // Redirect to selected page
+        }
+    }
+</script>
+
+
+        <!-- Card 2: Initiate Call (No Changes) -->
         <div class="card">
             <img src="/images/smcall.jpg" class="card-img" alt="Card Image 2">
             <div class="card-body">
@@ -42,7 +55,7 @@
             </div>
         </div>
 
-        <!-- Card 3 -->
+        <!-- Card 3: Show JO History (No Changes) -->
         <div class="card">
             <img src="/images/smhistory.jpg" class="card-img" alt="Card Image 3">
             <div class="card-body">
