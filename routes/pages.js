@@ -27,4 +27,8 @@ router.get('/repairupdate', requireLogin, (req, res) => res.render('repairupdate
 router.get('/forfeiture', requireLogin, (req, res) => res.render('forfeiture'));
 router.get('/manualsms', requireLogin, (req, res) => res.render('manualsms'));
 
+// Route for Call Client Page
+router.get('/callclient', requireLogin, (req, res) => res.render('callclient'));
+
+
 module.exports = router;
