@@ -10,7 +10,7 @@ router.get('/login', (req, res) => {
 router.post('/login', (req, res) => {
     const { username, password } = req.body;
 
-    const query = 'SELECT full_name FROM users WHERE username = ? AND password = ?';
+    const query = 'SELECT full_name FROM user_accounts WHERE username = ? AND password = ?';
     db.query(query, [username, password], (err, results) => {
         if (err) {
             console.error('Database error:', err);
