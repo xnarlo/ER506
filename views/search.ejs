@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STN Search</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+    <h2>Search by STN</h2>
+
+    <form id="searchForm">
+        <input type="text" id="stnInput" placeholder="Enter STN" required>
+        <button type="submit">Search</button>
+    </form>
+
+    <div id="resultContainer"></div>
+
+    <script>
+        document.getElementById("searchForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+            const stn = document.getElementById("stnInput").value;
+
+            fetch(`/api/search?stn=${stn}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        document.getElementById("resultContainer").innerHTML = `<p style="color: red;">${data.error}</p>`;
+                    } else {
+                        let resultHTML = `
+                            <h3>Client Information</h3>
+                            <p><strong>STN:</strong> ${data.stn}</p>
+                            <p><strong>SS Number:</strong> ${data.ss_number}</p>
+                            <p><strong>Client Name:</strong> ${data.client_name}</p>
+                            <p><strong>Contact Person:</strong> ${data.contact_person}</p>
+                            <p><strong>Contact Number:</strong> ${data.contact_number}</p>
+                            <p><strong>Email:</strong> ${data.email}</p>
+                            <p><strong>Model Number:</strong> ${data.model_number}</p>
+                            <p><strong>Serial Number:</strong> ${data.serial_number}</p>
+                            <p><strong>Warranty Check:</strong> ${data.warranty_check}</p>
+
+                            <h3>Quotation Details</h3>
+                            <p><strong>Quotation Sent:</strong> ${data.quotation_sent}</p>
+                            <p><strong>Quotation Received:</strong> ${data.quotation_received}</p>
+                            <p><strong>Quotation Price:</strong> ₱${data.quotation_price}</p>
+
+                            <h3>Balance Options</h3>
+                            <label><input type="radio" name="balance" id="withBalance"> With Outstanding Balance</label>
+                            <input type="number" id="paidAmount" placeholder="Enter Paid Amount" disabled>
+                            <br>
+                            <label><input type="radio" name="balance" id="noBalance"> No Balance</label>
+
+                            <h3>Generated Message</h3>
+                            <textarea id="generatedMessage" rows="5" cols="50" readonly></textarea>
+                        `;
+
+                        document.getElementById("resultContainer").innerHTML = resultHTML;
+
+                        // Add event listeners for radio buttons
+                        document.getElementById("withBalance").addEventListener("change", function () {
+                            document.getElementById("paidAmount").disabled = false;
+                            generateMessage();
+                        });
+
+                        document.getElementById("noBalance").addEventListener("change", function () {
+                            document.getElementById("paidAmount").disabled = true;
+                            generateMessage();
+                        });
+
+                        document.getElementById("paidAmount").addEventListener("input", generateMessage);
+
+                        function generateMessage() {
+                            let message = "";
+                            let paidAmount = parseFloat(document.getElementById("paidAmount").value) || 0;
+                            let quotationPrice = parseFloat(data.quotation_price) || 0;
+                            let remainingBalance = quotationPrice - paidAmount;
+
+                            if (document.getElementById("withBalance").checked) {
+                                if (remainingBalance <= 0) {
+                                    message = `This is to inform you that ${data.model_number} under Service Slip Number: ${data.ss_number} with serial number ${data.serial_number} is ready for pick-up. Your balance has been fully paid.`;
+                                } else {
+                                    message = `This is to inform you that ${data.model_number} under Service Slip Number: ${data.ss_number} with serial number ${data.serial_number} is ready for pick-up. A balance of ₱${remainingBalance.toFixed(2)} is still required before release.`;
+                                }
+                            } else if (document.getElementById("noBalance").checked) {
+                                message = `This is to inform you that ${data.model_number} under Service Slip Number: ${data.ss_number} with serial number ${data.serial_number} is ready for pick-up. No outstanding balance.`;
+                            }
+
+                            document.getElementById("generatedMessage").value = message;
+                        }
+                    }
+                });
+        });
+    </script>
+
+</body>
+</html>
